@@ -1,0 +1,23 @@
+services:
+  face-embedder:
+    build: .
+    container_name: face_embedder_worker
+    environment:
+      # Script içinde os.getenv ile okuduğumuz değişkenler
+      - TEST_ROOT=/data/input
+      - OUTPUT_DIR=/data/output
+      # Deepface'in modelleri tekrar tekrar indirmemesi için volume ile kalıcı yapabiliriz (opsiyonel)
+      - DEEPFACE_HOME=/root/.deepface
+    volumes:
+      # Host'taki 'static/media/customer' klasörünü container'da '/data/input' dizinine bağlıyoruz
+      # Burayı kendi gerçek veri yolunuzla değiştirebilirsiniz
+      - ./static/media/customer:/data/input
+
+      # Çıktıların oluşacağı klasör
+      - ./output:/data/output
+
+      # Modellerin her defasında indirilmemesi için bir cache volume
+      - deepface_models:/root/.deepface
+
+volumes:
+  deepface_models:
