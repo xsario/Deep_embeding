@@ -11,7 +11,7 @@ services:
     volumes:
       # Host'taki 'static/media/customer' klasörünü container'da '/data/input' dizinine bağlıyoruz
       # Burayı kendi gerçek veri yolunuzla değiştirebilirsiniz
-      - ./static/media/customer:/data/input
+      - ./static/media/customer:/data/input:ro
 
       # Çıktıların oluşacağı klasör
       - ./output:/data/output
