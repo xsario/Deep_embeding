@@ -55,9 +55,13 @@ customer_dirs = sorted([
 for customer_id in customer_dirs:
     person_dir = os.path.join(TEST_ROOT, customer_id)
 
+    # Sadece belirli öneklerle başlayan dosyaları filtrele
+    target_prefixes = ("selfie_", "smiling_", "blinking_")
+
     images = sorted([
         f for f in os.listdir(person_dir)
-        if f.lower().endswith((".jpg", ".jpeg", ".png"))
+        if f.lower().endswith((".jpg", ".jpeg", ".png")) 
+        and f.lower().startswith(target_prefixes)
     ])
 
     for img_name in images:
